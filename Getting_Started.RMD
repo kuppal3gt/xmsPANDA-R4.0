@@ -1,0 +1,79 @@
+---
+title: "xmsPANDA_getting_started"
+output: html_document
+date: "2023-10-31"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Install dependencies
+
+
+
+```{r, echo=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="true")
+BiocManager::install(update = FALSE)
+
+BiocManager::install(c("mixOmics","CMA","GO.db","impute","limma","qvalue","pcaMethods","KEGGREST","genefilter",
+                       "BiocParallel","KEGGgraph","Rgraphviz","edgeR","formatR","graph"),suppressUpdates=TRUE,dependencies=TRUE)
+
+install.packages(c('rgl', 'snow', 'doSNOW', 'foreach', 'e1071', 'WGCNA','reshape2','robust','mvoutlier',
+'randomForest', 'party', 'fdrtool', 'GeneNet', 'corpcor', 'earth',
+'pROC', 'multcomp', 'pls', 'plsgenomics', 'igraph', 'ROCR',
+'flashClust', 'data.table', 'dplyr', 'mclust', 'RankAggreg', 'pamr', "tidyverse","grid",
+'sandwich', 'Boruta', 'lsmeans', 'car', 'ggpubr', 'extrafont', 'stepPlr', 'h2o','shinyBS', 'V8', 'shinyWidgets', 
+                   'plotly','shinycssloaders', 'colourpicker',"raster","ROSE","devtools",
+"lambda.r","formatR","futile.logger","futile.options","gmm"),dependencies=TRUE,
+                 repos="https://cran.r-project.org")
+
+
+Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="true")
+library(devtools); install_github("kuppal2/xmsPANDA")
+
+```
+
+
+## Launch the Shiny App 
+
+```{r,echo=FALSE}
+#launch xmsPANDA
+#suppressPackageStartupMessages(library(xmsPANDA))
+
+#run the Lite version
+runApp.xmsPANDALite()
+
+#OR run the full version
+#runApp.xmsPANDA()
+
+```
+
+## Running the sample script for two-class classification
+
+```{r, echo=FALSE}
+
+data(exh1n1)
+
+Xmat=exh1n1$Xmat
+Ymat=exh1n1$Ymat
+outloc=getwd()
+
+#limma
+demetabs_reslite1<-diffexp.lite(Xmat=Xmat,Ymat=Ymat,outloc=outloc,featselmethod="limma",normalization.method = "log2transform",
+                                pvalue.thresh = 0.05,fdrthresh=0.1,fdrmethod="BH",foldchangethresh = 0)
+
+#pls
+demetabs_reslite2<-diffexp.lite(Xmat=Xmat,Ymat=Ymat,outloc=outloc,featselmethod="pls",normalization.method = "log2transform",pls_vip_thresh=2,foldchangethresh = 0)
+
+
+#find common features selected by limma and pls
+demetabs_reslite_1and2<-merge(demetabs_reslite1$diffexp_metabs[,c("Name","P.value","adjusted.P.value")],demetabs_reslite2$diffexp_metabs,by=c("Name"))
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

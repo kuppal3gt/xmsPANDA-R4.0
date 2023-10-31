@@ -1,0 +1,13 @@
+Package: xmsPANDA
+Type: Package
+Title: R Package for Biomarker Discovery, Network, and Data Exploratory Analysis
+Version: 1.4.0
+Date: 2023-10-19
+Author: Karan Uppal
+Maintainer: Karan Uppal <kuppal3gt@gmail.com>
+Description: Includes functions to perform feature selection for classification and regression, network analysis, data exploratory, normalization, and functional analysis.
+License: GPL2.0
+LazyLoad: yes
+Depends: R (>= 4.0.0), parallel, CMA, tidyverse,extrafont,RColorBrewer,MASS,limma,GO.db, statmod, rgl,gplots, e1071, randomForest, party,qvalue,fdrtool, earth, pROC, nlme, ROCR,flashClust,pamr, Boruta, sandwich, V8, lsmeans,car,impute, colourpicker, ggpubr,shinyBS,shinyWidgets,shinycssloaders,mixOmics,plyr,plsgenomics,pls,igraph,reshape2,raster,tidyr,robust,lattice
+RoxygenNote: 7.2.3
+Encoding: UTF-8
