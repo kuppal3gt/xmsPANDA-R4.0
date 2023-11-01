@@ -30871,7 +30871,7 @@ diffexp.lite<-function(Xmat=NA,Ymat=NA,outloc=NA,
 #  print(sessionInfo())
   analysistype="oneway"
 
-  if(length(featselmethod)>1){
+  if(length(featselmethod)==1){
           if(featselmethod=="limma2way" | featselmethod=="lm2wayanova" | featselmethod=="spls2way"){
             analysistype="twowayanova"
           }else{
