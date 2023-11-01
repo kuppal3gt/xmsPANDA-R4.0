@@ -30870,25 +30870,26 @@ diffexp.lite<-function(Xmat=NA,Ymat=NA,outloc=NA,
  # sink(fname)
 #  print(sessionInfo())
   analysistype="oneway"
-  
-  if(featselmethod=="limma2way" | featselmethod=="lm2wayanova" | featselmethod=="spls2way"){
-    analysistype="twowayanova"
-  }else{
-    
-    if(featselmethod=="limma2wayrepeat" | featselmethod=="lm2wayanovarepeat" | featselmethod=="spls2wayrepeat"){
-      analysistype="twowayrepeat"
-      pairedanalysis=TRUE
-    }else{
-      
-      if(featselmethod=="limma1wayrepeat" | featselmethod=="lm1wayanovarepeat" | featselmethod=="spls1wayrepeat"){
-        analysistype="onewayrepeat"
-        pairedanalysis=TRUE
-      }
-      
-    }
-    
+
+  if(length(featselmethod)>1){
+          if(featselmethod=="limma2way" | featselmethod=="lm2wayanova" | featselmethod=="spls2way"){
+            analysistype="twowayanova"
+          }else{
+            
+            if(featselmethod=="limma2wayrepeat" | featselmethod=="lm2wayanovarepeat" | featselmethod=="spls2wayrepeat"){
+              analysistype="twowayrepeat"
+              pairedanalysis=TRUE
+            }else{
+              
+              if(featselmethod=="limma1wayrepeat" | featselmethod=="lm1wayanovarepeat" | featselmethod=="spls1wayrepeat"){
+                analysistype="onewayrepeat"
+                pairedanalysis=TRUE
+              }
+              
+            }
+            
+          }
   }
-  
   if(length(featselmethod)>1){
     
     if(length(rsd.filt.list)>1){

@@ -12,10 +12,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # This Notebook includes steps for installing xmsPANDA v1.4.0 and it's dependencies. v1.4.0 of xmsPANDA includes updates to make it compatible with R 4.0 and higher. 
 
-## Install dependencies
+## Install dependencies - run only if necessary and set eval=TRUE
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,eval=FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
@@ -59,10 +59,14 @@ runApp.xmsPANDALite()
 
 ```{r, echo=FALSE}
 
-data(exh1n1)
+feature_table_file<-"https://raw.githubusercontent.com/kuppal3gt/xmsPANDA-R4.0/main/inst/shinyapp/example_data/exh1n1_metabolome.txt"
+class_labels_file<-"https://raw.githubusercontent.com/kuppal3gt/xmsPANDA-R4.0/main/inst/shinyapp/example_data/exh1n1_classlabels.txt"
+outloc<-paste0(getwd(),"/xmsPANDAliteout/")
 
-Xmat=exh1n1$Xmat
-Ymat=exh1n1$Ymat
+
+Xmat<-read.table(feature_table_file,sep="\t",header=TRUE,stringsAsFactors = FALSE,check.names = FALSE)
+Ymat<-read.table(class_labels_file,sep="\t",header=TRUE,stringsAsFactors = FALSE,check.names = FALSE)
+
 outloc=getwd()
 
 #limma

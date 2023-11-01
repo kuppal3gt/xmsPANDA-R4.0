@@ -19,7 +19,7 @@ ui<-fluidPage(
     ),
     column(12,
         tags$div(id="form",
-          h3(tags$img(style="float:left;margin-right:15px;",src="images/xmsPANDA_log.png",height='80px',width="80px"),"xmsPANDA Lite (1.3.2) - R package for biomarker discovery,
+          h3(tags$img(style="float:left;margin-right:15px;",src="images/xmsPANDA_log.png",height='80px',width="80px"),"xmsPANDA Lite beta (1.4.0) - R package for biomarker discovery,
              supervised and unsupervised learning, and network analysis")),
         tabsetPanel(
          
@@ -35,6 +35,6 @@ ui<-fluidPage(
     ),
     column(style="padding-top:0px;padding-bottom:0px;",12,tags$hr(style="margin-top:0px;margin-bottom:15px;border-top: 0.5px solid #ccccb3;")),
  column(12,  tags$div(style="margin-center",tags$footer(align="center",color="white",style="font-weight:normal;font-size:95%;color:black","Please ask questions or report any issues on the ",
-                                                        tags$a(href='https://github.com/kuppal2/xmsPANDA/issues',target="_blank","GitHub"), " page"))),
-column(12,  tags$div(style="margin-center",tags$footer(align="center",color="white",style="font-weight:normal;font-size:95%;color:black","Release date: 05/14/2021"))),
+                                                        tags$a(href='https://github.com/kuppal3gt/xmsPANDA-R4.0/issues',target="_blank","GitHub"), " page"))),
+column(12,  tags$div(style="margin-center",tags$footer(align="center",color="white",style="font-weight:normal;font-size:95%;color:black","Release date: 10/31/2023"))),
 )
