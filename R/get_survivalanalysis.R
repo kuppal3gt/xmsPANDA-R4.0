@@ -1,6 +1,5 @@
 get_survivalanalysis <-
-function(Xmat,Ymat,GroupBy.variable="sex",cox.glmnet=FALSE,newdevice=TRUE,
-         plot.width=8,plot.height=8,KMplot=TRUE)
+function(Xmat,Ymat,GroupBy.variable="sex",cox.glmnet=FALSE,newdevice=TRUE,plot.width=8,plot.height=8,KMplot=TRUE)
 {
   
   

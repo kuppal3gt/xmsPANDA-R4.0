@@ -22,7 +22,7 @@ function(sdata,KMplot=TRUE,forestplot=TRUE,diagnosis=TRUE, maintitle="",
   #subject_id=as.vector(data[,-1])
 
   
-  if(is(sdata[,1])=="numeric" & is(sdata[,2])=="numeric"){ # & class(sdata[,3])=="numeric"){
+  if(class(sdata[,1])=="numeric" & class(sdata[,2])=="numeric"){ # & class(sdata[,3])=="numeric"){
     
     #colnames(sdata)[1:3]=c("time","status","intensity")
     
@@ -30,13 +30,15 @@ function(sdata,KMplot=TRUE,forestplot=TRUE,diagnosis=TRUE, maintitle="",
     
    
     
-
+    #colnames(sdata)[1:3]=c("time","status","intensity")
     fit <- coxph(Surv(time, status) ~ ., data=sdata)
     
     outlist[[length(outlist)+1]] <- fit
     names(outlist)[length(outlist)] <- "fitted_model"
   
       
+    
+    #print(summary(fit))
     
     plist = list()
     

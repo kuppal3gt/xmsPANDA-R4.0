@@ -2,7 +2,7 @@ diffRank <-
 function(adjMtrxSample1,adjMtrxSample2,degree.centrality.method="eigenvector",node_names=NA,class_labels=c(1,2),
                    plot_graph_bool=FALSE,label.cex=0.5,vertex.size=0.7,ignore.edge.weights=FALSE)
   {
-  . <- NULL
+  
   suppressMessages(library(igraph))
   
  #save(adjMtrxSample1,adjMtrxSample2,degree.centrality.method,node_names,ignore.edge.weights,class_labels,file="adj.Rda")

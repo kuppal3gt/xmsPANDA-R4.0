@@ -733,10 +733,10 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
     save(s2.metab,file="s2metab.Rda")
   }
   
-  if(is.na(s1.samp)==FALSE){
+  if(is.na(s1.samp)[1]==FALSE){
     s1.samp=round(mean(s1.samp[,3],na.rm=TRUE),2)
   }
-  if(is.na(s2.metab)==FALSE){
+  if(is.na(s2.metab)[1]==FALSE){
     s2.metab=try(round(mean(s2.metab[,3],na.rm=TRUE),2),silent=TRUE)
   }
   
@@ -1058,7 +1058,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
       if(col_samples==FALSE){
         if(is.data.znorm==FALSE){
           
-          if(is.na(rowcolors)==FALSE){
+          if(is.na(rowcolors)[1][1]==FALSE){
             
             w <- 0.1
             par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
@@ -1094,7 +1094,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
           
         }else{
           
-          if(is.na(rowcolors)==FALSE){
+          if(is.na(rowcolors)[1][1]==FALSE){
             w <- 0.1
             par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
             
@@ -1130,7 +1130,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
         
         if(is.data.znorm==FALSE){
           
-          if(is.na(rowcolors)==FALSE){
+          if(is.na(rowcolors)[1]==FALSE){
             w <- 0.1
             par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
             #print(rowcolors)
@@ -1171,7 +1171,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
           
         }else{
           
-          if(is.na(rowcolors)==FALSE){
+          if(is.na(rowcolors)[1]==FALSE){
             
             w <- 0.1
             par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
@@ -1363,7 +1363,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
         if(col_samples==FALSE){
           if(is.data.znorm==FALSE){
             
-            if(is.na(rowcolors)==FALSE){
+            if(is.na(rowcolors)[1]==FALSE){
               
               w <- 0.1
               par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
@@ -1393,7 +1393,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
             }
           }else{
             
-            if(is.na(rowcolors)==FALSE){
+            if(is.na(rowcolors)[1]==FALSE){
               
               w <- 0.1
               par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
@@ -1426,7 +1426,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
         }else{
           if(is.data.znorm==FALSE){
             
-            if(is.na(rowcolors)==FALSE){
+            if(is.na(rowcolors)[1]==FALSE){
               
               w <- 0.1
               par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
@@ -1456,7 +1456,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
             }
           }else{
             
-            if(is.na(rowcolors)==FALSE){
+            if(is.na(rowcolors)[1]==FALSE){
               w <- 0.1
               par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
               
@@ -1813,7 +1813,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
              if(col_samples==FALSE){
                if(is.data.znorm==FALSE){
                  
-                 if(is.na(rowcolors)==FALSE){
+                 if(is.na(rowcolors)[1]==FALSE){
                    
                    w <- 0.1
                    par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
@@ -1843,7 +1843,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
                  }
                }else{
                  
-                 if(is.na(rowcolors)==FALSE){
+                 if(is.na(rowcolors)[1]==FALSE){
                    
                    w <- 0.1
                    par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
@@ -1876,7 +1876,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
              }else{
                if(is.data.znorm==FALSE){
                  
-                 if(is.na(rowcolors)==FALSE){
+                 if(is.na(rowcolors)[1]==FALSE){
                    
                    w <- 0.1
                    par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
@@ -1906,7 +1906,7 @@ function(feature_table_file,parentoutput_dir,class_labels_file,X=NA,Y=NA,heatmap
                  }
                }else{
                  
-                 if(is.na(rowcolors)==FALSE){
+                 if(is.na(rowcolors)[1]==FALSE){
                    w <- 0.1
                    par(omd=c(0, 1-w, 0, 1),cex.main=0.7)
                    

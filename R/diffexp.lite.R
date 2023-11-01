@@ -325,11 +325,11 @@ function(Xmat=NA,Ymat=NA,outloc=NA,
     parentoutput_dir=getwd()
   }
   
-  if(is.na(Xmat)==FALSE){
+  if(is.na(Xmat)[1]==FALSE){
     
     feature_table_file=NA
   }
-  if(is.na(Ymat)==FALSE){
+  if(is.na(Ymat)[1]==FALSE){
     
     class_labels_file=NA
   }

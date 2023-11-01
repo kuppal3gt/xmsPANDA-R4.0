@@ -1,4 +1,4 @@
-diffexp.biomarkers1 <-
+diffexp.biomarkers <-
 function(X=NA,Y=NA,feature_table_file=NA,class_labels_file=NA,
                               feat.sel.methods=c("rf","rfe","pls","limma","lasso"),num.var.sel=10,prop.select.thresh=0.7,
                               split.train.test=FALSE,train.pct=0.7,outloc,kfold=10,pca.ellipse=TRUE,Xtest=NA,Ytest=NA,
@@ -15,7 +15,11 @@ function(X=NA,Y=NA,feature_table_file=NA,class_labels_file=NA,
                               num_nodes=2,ylabel="Intensity",cex.plots=0.7,tune_classifiers=FALSE,
                               find.common.features=FALSE,aggregation.method="consensus",
                               aggregation.max.iter=1000,add.pvalues=TRUE,add.jitter=TRUE,
-                              alphabetical.order=FALSE,boxplot.type="ggplot",balance.classes=FALSE,deeplearning=FALSE,alpha.col=1,ggplot.type1=NA)
+                              alphabetical.order=FALSE,boxplot.type="ggplot",
+                             balance.classes=FALSE,deeplearning=FALSE,alpha.col=1,ggplot.type1=NA,
+                             hca_type="two-way",multiple.figures.perpanel = FALSE,     
+                             hca.labRow.value = FALSE, hca.labCol.value = FALSE,                   
+                             similarity.matrix = "correlation")
 {
   
   options(warn=-1)
@@ -29,6 +33,8 @@ function(X=NA,Y=NA,feature_table_file=NA,class_labels_file=NA,
   
   match_class_dist=TRUE
   analysistype="oneway"
+  labRow.value=hca.labRow.value
+  labCol.value=hca.labCol.value
   iter.quantile.thresh=prop.select.thresh
   #library(randomForest)
   #library(CMA)
@@ -1031,7 +1037,7 @@ function(X=NA,Y=NA,feature_table_file=NA,class_labels_file=NA,
     class_rf <- classification(X =X, y = Y, learningsets = fiveCV10iter, classifier = rfCMA,trace=FALSE) #tuneres = tune_rf,
     #size=3,decay=0.1) #
     set.seed(seedvalue)
-    class_plr<- classification(X =X, y = Y, learningsets = fiveCV10iter, classifier = plrCMA,trace=FALSE) #tuneres=tune_plr,
+    class_plslr<- classification(X =X, y = Y, learningsets = fiveCV10iter, classifier = plrCMA,trace=FALSE) #tuneres=tune_plr,
     if(length(good_feats_index)>2){ 
       ##save(class_plslda,file="class_plslda.Rda")
       
@@ -1158,22 +1164,13 @@ function(X=NA,Y=NA,feature_table_file=NA,class_labels_file=NA,
     text2<-paste(dim(v1)[2], " learning sets using training data",sep="")
     
     
-    if(length(class_levels)==0){
-      
-      eval_mat1<-cbind(text2,100*(1-mean(eval_plslda@score)),100*(1-mean(eval_plslr@score)),100*(1-mean(eval_plsrf@score)),100*(1-mean(eval_scda@score)),100*(1-mean(eval_svm@score)),100*(1-mean(eval_rf@score)),100*(1-mean(eval_nnet@score)),100*(1-mean(eval_plr@score)),100*(1-mean(eval_lassoplr@score)),100*(1-mean(eval_elasticnetplr@score)))
-      
-      best_classifier<-which(eval_mat1==max(eval_mat1))
-      classifier_names<-c("PLSLDA","PLSLR","PLSRF","SCDA","SVM","RF","NNet","pLR","pLRlasso","pLRelasticnet")
-      
-      best_classifier_name<-classifier_names[best_classifier]
-      
-      eval_mat1<-cbind(text2,100*(1-mean(eval_plslda@score)),100*(1-mean(eval_plslr@score)),100*(1-mean(eval_plsrf@score)),100*(1-mean(eval_scda@score)),100*(1-mean(eval_svm@score)),100*(1-mean(eval_rf@score)),100*(1-mean(eval_nnet@score)),100*(1-mean(eval_plr@score)),100*(1-mean(eval_lassoplr@score)),100*(1-mean(eval_elasticnetplr@score)))
-      
-      colnames(eval_mat1)<-c("Dataset","PLSLDA","PLSLR","PLSRF","SCDA","SVM","RF","NNet","pLR","pLRlasso","pLRelasticnet")
-    }else{
+  
       
       if(length(good_feats_index)>2){
-        eval_mat1<-cbind(100*(1-mean(eval_plslda@score)),100*(1-mean(eval_plsrf@score)),100*(1-mean(eval_scda@score)),100*(1-mean(eval_svm@score)),100*(1-mean(eval_rf@score)),100*(1-mean(eval_nnet@score)),100*(1-mean(eval_plr@score)))
+        eval_mat1<-cbind(100*(1-mean(eval_plslda@score)),100*(1-mean(eval_plsrf@score)),
+                         100*(1-mean(eval_scda@score)),100*(1-mean(eval_svm@score)),
+                         100*(1-mean(eval_rf@score)),100*(1-mean(eval_nnet@score)),
+                         100*(1-mean(eval_plr@score)))
       }else{
         if(is.na(class_scda)==FALSE){
           eval_scda@score=1-mean(eval_scda@score)
@@ -1199,7 +1196,7 @@ function(X=NA,Y=NA,feature_table_file=NA,class_labels_file=NA,
       
       colnames(eval_mat1)<-c("Dataset","PLSLDA","PLSRF","SCDA","SVM","RF","NNet","pLR")
       
-    }
+    
     
     if(output.device.type!="pdf"){
       
@@ -1268,7 +1265,8 @@ function(X=NA,Y=NA,feature_table_file=NA,class_labels_file=NA,
       
       try(get_hca(parentoutput_dir=outloc,X=good_feats,Y=Y1,heatmap.col.opt=heatmap.col.opt,cor.method="spearman",is.data.znorm=FALSE,analysismode="classification",
                   sample.col.opt="rainbow",plots.width=2000,plots.height=2000,plots.res=300, alphacol=0.3, hca_type=hca_type,
-                  newdevice=FALSE,labRow.value = labRow.value, labCol.value = labCol.value,similarity.matrix=similarity.matrix,cexLegend=hca.cex.legend,cexRow=cex.plots,cexCol=cex.plots),silent=TRUE)
+                  newdevice=FALSE,
+                  labRow.value = labRow.value, labCol.value = labCol.value,similarity.matrix=similarity.matrix,cexLegend=hca.cex.legend,cexRow=cex.plots,cexCol=cex.plots),silent=TRUE)
       
       
       
@@ -1316,7 +1314,9 @@ function(X=NA,Y=NA,feature_table_file=NA,class_labels_file=NA,
                  sample.col.opt=sample.col.opt,
                  newdevice=FALSE,cex.plots=cex.plots,
                  ylabel=ylabel,add.pvalues=add.pvalues,add.jitter=add.jitter,
-                 boxplot.type=boxplot.type,study.design=analysistype,multiple.figures.perpanel=multiple.figures.perpanel,alphacol = alpha.col,ggplot.type1=ggplot.type1,facet.nrow=facet.nrow)
+                 boxplot.type=boxplot.type,study.design=analysistype,
+                 multiple.figures.perpanel=multiple.figures.perpanel,
+                 alphacol = alpha.col,ggplot.type1=ggplot.type1,facet.nrow=facet.nrow)
     
     
     
@@ -2010,6 +2010,7 @@ function(X=NA,Y=NA,feature_table_file=NA,class_labels_file=NA,
             
             #loss="CrossEntropy",
             
+            require(h2o)
             try(h2o.removeAll(),silent=TRUE)
             
             localH2O = h2o.init(ip = "localhost", port = 54321, startH2O = TRUE, max_mem_size='2g',nthreads=1)

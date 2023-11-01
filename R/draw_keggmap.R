@@ -12,7 +12,7 @@ function(targeted_table,outloc,foldchange.thresh=2,minhit=3,highcolor='red',lowc
   targeted_table[,'map'] <- unlist(mclapply(1:length(iddata), function(j) {
     API=paste("http://rest.kegg.jp/get/",as.character(iddata[j]),sep="")
     content<-try(readLines(API),silent=TRUE)
-    if (is(content) == "try-error") {
+    if (class(content) == "try-error") {
       return(NA)
     }else{
       return(paste(gsub('^.*(map[0-9]*).*$','\\1',content[grep('map[0-9]',content)],perl=TRUE),collapse=","))

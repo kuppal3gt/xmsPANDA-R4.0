@@ -391,7 +391,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
   dir.create(parentoutput_dir1,showWarnings=FALSE)
   
   setwd(parentoutput_dir1)	
-  if(is.na(Xmat[1])==TRUE){
+  if(is.na(Xmat)[1]==TRUE){
     X<-read.table(feature_table_file,sep="\t",header=TRUE,stringsAsFactors=FALSE,check.names=FALSE)
     
   
@@ -773,7 +773,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
 
       
       
-      if(is.na(Ymat)==TRUE){
+      if(is.na(Ymat)[1][1]==TRUE){
         classlabels<-read.table(class_labels_file,sep="\t",header=TRUE)
         
  
@@ -823,7 +823,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
         #analysismode="classification"
         
         #save(classlabels,file="thisclasslabels.Rda")
-        #if(is.na(Ymat)==TRUE)
+        #if(is.na(Ymat)[1]==TRUE)
         {
           #classlabels<-read.table(class_labels_file,sep="\t",header=TRUE)
           
@@ -1386,7 +1386,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
           
           #classlabels<-read.table(class_labels_file,sep="\t",header=TRUE)
           
-          if(is.na(Ymat)==TRUE){
+          if(is.na(Ymat)[1]==TRUE){
             classlabels<-read.table(class_labels_file,sep="\t",header=TRUE)
             Ymat<-classlabels
             
@@ -1514,7 +1514,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
           #							classlabels<-read.table(class_labels_file,sep="\t",header=TRUE)
           
           
-          if(is.na(Ymat)==TRUE){
+          if(is.na(Ymat)[1]==TRUE){
             classlabels<-read.table(class_labels_file,sep="\t",header=TRUE)
             Ymat<-classlabels
             
@@ -1839,7 +1839,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
     
   }
   
-  if(is.na(names_with_mz_time)==TRUE){
+  if(is.na(names_with_mz_time)[1]==TRUE){
     names_with_mz_time=data_matrix$names_with_mz_time
   }
   #  #save(data_matrix,file="data_matrix.Rda")
@@ -2398,7 +2398,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
                  "aquamarine","aquamarine3","bisque","burlywood1","lavender","khaki3","black")
   
   
-  if(is.na(individualsampleplot.col.opt)==TRUE){
+  if(is.na(individualsampleplot.col.opt)[1]==TRUE){
     
     individualsampleplot.col.opt=col_vec
   }
@@ -2500,7 +2500,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
   #write.table(classlabels,file="classlabels.txt",sep="\t")
   #write.table(classlabels_response_mat,file="classlabels_response_mat.txt",sep="\t")
   
-  if(is.na(max_varsel)==TRUE){
+  if(is.na(max_varsel)[1]==TRUE){
     
     max_varsel=dim(data_m)[1]
   }
@@ -2669,7 +2669,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
     #ylab_text=paste("Abundance",sep="")
     
     
-    if(is.na(names_with_mz_time)==FALSE){
+    if(is.na(names_with_mz_time)[1]==FALSE){
       data_m_fc_with_names<-merge(names_with_mz_time,data_m_fc_withfeats,by=c("mz","time"))
       data_m_fc_with_names<-data_m_fc_with_names[match(data_m_fc_withfeats$mz,data_m_fc_with_names$mz),]
       #save(names_with_mz_time,goodfeats,goodfeats_with_names,file="goodfeats_with_names.Rda")
@@ -2724,7 +2724,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
       
     }
     
-  if(is.na(outlier.method)==FALSE){
+  if(is.na(outlier.method)[1]==FALSE){
     if(output.device.type!="pdf"){
       
       temp_filename_1<-paste("Figures/OutlierDetection",outlier.method,".png",sep="")
@@ -2946,9 +2946,20 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
                          
                     rownames(data_m_fc_withfeats)<-data_m_fc_with_names$Name
                     
-                   # save(data_m_fc_withfeats,data_m_fc_with_names,file="data_m_fc_withfeats.Rda")
+                    save(data_m_fc_withfeats,data_m_fc_with_names,file="data_m_fc_withfeats.Rda")
           
                           classlabels_orig_pca<-classlabels_orig
+                         
+                          if(FALSE){ 
+                          c1<-get_pcascoredistplots(X=data_m_fc_withfeats,Y=classlabels_orig,feature_table_file=NA,parentoutput_dir=getwd(),class_labels_file=NA,sample.col.opt=sample.col.opt,
+                                                    plots.width=2000,plots.height=2000,plots.res=300, alphacol=0.3,col_vec=col_vec,pairedanalysis=pairedanalysis,pca.cex.val=pca.cex.val,legendlocation=legendlocation,
+                                                    pca.ellipse=pca.ellipse,ellipse.conf.level=ellipse.conf.level,
+                                                    filename="all",paireddesign=paireddesign,lineplot.col.opt=lineplot.col.opt,
+                                                    lineplot.lty.option=lineplot.lty.option,timeseries.lineplots=timeseries.lineplots,
+                                                    pcacenter=pcacenter,pcascale=pcascale,alphabetical.order=alphabetical.order,
+                                                    study.design=analysistype,lme.modeltype=lme.modeltype)
+                          }
+                          
                           c1=try(get_pcascoredistplots(X=data_m_fc_withfeats,Y=classlabels_orig,feature_table_file=NA,parentoutput_dir=getwd(),class_labels_file=NA,sample.col.opt=sample.col.opt,
                                                        plots.width=2000,plots.height=2000,plots.res=300, alphacol=0.3,col_vec=col_vec,pairedanalysis=pairedanalysis,pca.cex.val=pca.cex.val,legendlocation=legendlocation,
                                                        pca.ellipse=pca.ellipse,ellipse.conf.level=ellipse.conf.level,
@@ -3051,7 +3062,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
           #print("HERE")
           #savedata_m_fc,classlabels,file="pamdebug.Rda")
           
-          if(is.na(fdrthresh)==FALSE){
+          if(is.na(fdrthresh)[1]==FALSE){
             if(fdrthresh>0.5){
               
               pamrthresh=pvalue.thresh
@@ -3081,7 +3092,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
           
           discore_all<-pamr.res$max.discore.allfeats
           
-          if(is.na(goodip)==FALSE){
+          if(is.na(goodip)[1]==FALSE){
             discore[goodip]<-pamr.res$max.discore.sigfeats
             
             sel.diffdrthresh<-feature_rowindex%in%goodip
@@ -7657,7 +7668,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
           t1<-table(classlabels)
           
           
-          if(is.na(names_with_mz_time)==FALSE){
+          if(is.na(names_with_mz_time)[1]==FALSE){
             data_m_fc_withfeats_A1<-merge(names_with_mz_time,data_m_fc_withfeats,by=c("mz","time"))
             
             rownames(data_m_fc_withfeats)<-as.character(data_m_fc_withfeats_A1$Name)
@@ -7729,7 +7740,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
               #dev.off()
               
               
-              if(is.na(names_with_mz_time)==FALSE){
+              if(is.na(names_with_mz_time)[1]==FALSE){
               
                 goodfeats_with_names<-merge(names_with_mz_time,goodfeats,by=c("mz","time"))
                 
@@ -8156,7 +8167,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
             
             goodfeats<-goodfeats[-which(is.na(goodfeats$mz)==TRUE),]
           }
-          if(is.na(names_with_mz_time)==FALSE){
+          if(is.na(names_with_mz_time)[1]==FALSE){
             
             goodfeats_with_names<-merge(names_with_mz_time,goodfeats,by=c("mz","time"))
             goodfeats_with_names<-goodfeats_with_names[match(goodfeats$mz,goodfeats_with_names$mz),]
@@ -8609,7 +8620,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
             
             
             
-            if(is.na(names_with_mz_time)==FALSE){
+            if(is.na(names_with_mz_time)[1]==FALSE){
               
               
               group_means1<-merge(group_means,group_sd,by=c("mz","time"))
@@ -8803,7 +8814,7 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
           allmetabs_res<-data_limma_fdrall_withfeats_2
          
           
-          if(is.na(names_with_mz_time)==FALSE){
+          if(is.na(names_with_mz_time)[1]==FALSE){
             
             
             allmetabs_res_withnames<-merge(names_with_mz_time,data_limma_fdrall_withfeats_2,by=c("mz","time"))
@@ -9835,7 +9846,9 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
                                                       multiple.figures.perpanel=multiple.figures.perpanel,numnodes=num_nodes,
                                                       plot.height = plots.height,plot.width=plots.width,
                                                       filename="Figures/Boxplots.selectedfeats.normalized",alphacol = alpha.col,ggplot.type1=ggplot.type1,facet.nrow=facet.nrow,
-                                                      boxplot.strip.position ="bottom",remove.xaxis.labels=TRUE,replace.outliers =FALSE)
+                                                      boxplot.strip.position ="bottom",
+                                                      remove.xaxis.labels=TRUE,
+                                                      replace.outliers =FALSE)
                                     
                                   }else{
                                   
@@ -9844,8 +9857,10 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
                                                alphabetical.order=alphabetical.order,boxplot.type=boxplot.type,study.design=analysistype,
                                                multiple.figures.perpanel=multiple.figures.perpanel,numnodes=num_nodes,
                                               plot.height = plots.height,plot.width=plots.width,
-                                               filename="Figures/Boxplots.selectedfeats.normalized",alphacol = alpha.col,ggplot.type1=ggplot.type1,facet.nrow=facet.nrow,
-                                              boxplot.strip.position ="bottom",remove.xaxis.labels=TRUE,replace.outliers =FALSE)
+                                               filename="Figures/Boxplots.selectedfeats.normalized",
+                                              alphacol = alpha.col,ggplot.type1=ggplot.type1,facet.nrow=facet.nrow,
+                                              boxplot.strip.position ="bottom",
+                                              remove.xaxis.labels=TRUE,replace.outliers =FALSE)
                                   }
                         
                       }else{

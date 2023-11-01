@@ -9,7 +9,13 @@ function(target.data,target.data.annot=NA,kegg_species_code="hsa",database="path
   suppressMessages(library('KEGGREST'))
   
   colnames(target.data)<-c("XID","Statistic")
-
+  
+ # print(fcs.min.hits)
+  #print(itrs)
+ # print(numnodes)
+  #print(head(target.data))
+  #print(head(reference_set))
+  #print(type.statistic)
   
   count.unique.formula.overlapsize=TRUE
   dup.feature.check=TRUE
@@ -26,62 +32,62 @@ function(target.data,target.data.annot=NA,kegg_species_code="hsa",database="path
     if(database=="pathway"){
       #homo sapiens: humans
       if(kegg_species_code=="hsa"){
-        attach(kegg_hsa)
+        data(kegg_hsa)
         g1=kegg_hsa
-        detach("kegg_hsa")
+        rm(kegg_hsa)
       }else{
         #Mus musculus: mouse
         if(kegg_species_code=="mmu"){
-          attach(kegg_mmu)
+          data(kegg_mmu)
           g1=kegg_mmu
-          detach("kegg_mmu")
+          rm(kegg_mmu)
         }else{
           
           #Pan troglodytes: Chimpanzee
           if(kegg_species_code=="ptr"){
-            attach(kegg_ptr)
+            data(kegg_ptr)
             g1=kegg_ptr
-            detach("kegg_ptr")
+            rm(kegg_ptr)
           }else{
             
             #Macaca mulatta: Rhesus monkey
             if(kegg_species_code=="mcc"){
-              attach(kegg_mcc)
+              data(kegg_mcc)
               g1=kegg_mcc
-              detach("kegg_mcc")
+              rm(kegg_mcc)
             }else{
               #Bos taurus: cow
               if(kegg_species_code=="bta"){
-                attach(kegg_bta)
+                data(kegg_bta)
                 g1=kegg_bta
-                detach("kegg_bta")
+                rm(kegg_bta)
               }else{
                 #Rattus norvegicus: rat
                 if(kegg_species_code=="rno"){
-                  attach(kegg_rno)
+                  data(kegg_rno)
                   g1=kegg_rno
-                  detach("kegg_rno")
+                  rm(kegg_rno)
                 }else{
                   
                   #Danio rerio: Zebrafish
                   if(kegg_species_code=="dre"){
-                    attach(kegg_dre)
+                    data(kegg_dre)
                     g1=kegg_dre
-                    detach("kegg_dre")
+                    rm(kegg_dre)
                   }else{
                     
                     #C. elegans: nematode
                     if(kegg_species_code=="cel"){
-                      attach(kegg_cel)
+                      data(kegg_cel)
                       g1=kegg_cel
-                      detach("kegg_cel")
+                      rm(kegg_cel)
                     }else{
                       
                       #Drosophila melanogaster: fruit fly
                       if(kegg_species_code=="dme"){
-                        attach(kegg_dme)
+                        data(kegg_dme)
                         g1=kegg_dme
-                        detach("kegg_dme")
+                        rm(kegg_dme)
                       }
                       
                     }
@@ -103,66 +109,66 @@ function(target.data,target.data.annot=NA,kegg_species_code="hsa",database="path
       
       if(database=="module"){
         
-        attach(kegg_modules)
+        data(kegg_modules)
         g1=kegg_modules
-        detach("kegg_modules")
+        rm(kegg_modules)
       }else{
         if(database=="brite"){
           
-          attach(kegg_brite)
+          data(kegg_brite)
           g1=kegg_brite
-          detach("kegg_brite")
+          rm(kegg_brite)
         }else{
           if(database=="lipidmaps_mainclass"){
             
-            attach(lipidmaps_mainclass)
+            data(lipidmaps_mainclass)
             g1=lipidmaps_mainclass
-            detach("lipidmaps_mainclass")
+            rm(lipidmaps_mainclass)
           }else{
             
             if(database=="lipidmaps_subclass"){
               
-              attach(lipidmaps_subclass)
+              data(lipidmaps_subclass)
               g1=lipidmaps_subclass
-              detach("lipidmaps_subclass")
+              rm(lipidmaps_subclass)
             }else{
               
               if(database=="refmet_superclass"){
                 
-                attach(refmet_superclass)
+                data(refmet_superclass)
                 g1=refmet_superclass
-                detach("refmet_superclass")
+                rm(refmet_superclass)
               }else{
                 if(database=="refmet_mainclass"){
                   
-                  attach(refmet_mainclass)
+                  data(refmet_mainclass)
                   g1=refmet_mainclass
-                  detach("refmet_mainclass")
+                  rm(refmet_mainclass)
                 }else{
                   
                   if(database=="refmet_subclass"){
                     
-                    attach(refmet_subclass)
+                    data(refmet_subclass)
                     g1=refmet_subclass
-                    detach("refmet_subclass")
+                    rm(refmet_subclass)
                   }else{
                     if(database=="reactome_compound"){
                       
-                      attach(reactome_atlas)
+                      data(reactome_atlas)
                       g1<-reactome_atlas[which(reactome_atlas$IDtype=="compound"),]
-                      detach("reactome_atlas")
+                      rm(reactome_atlas)
                     }else{
                       if(database=="reactome_atlas"){
                         
-                        attach(reactome_atlas)
+                        data(reactome_atlas)
                         g1<-reactome_atlas
-                        detach("reactome_atlas")
+                        rm(reactome_atlas)
                       }else{
                         if(database=="kegg_atlas"){
                           #load("/Users/karanuppal/Documents/Emory/JonesLab/Projects/DifferentialExpression/xmsPaNDA/xmsPANDA_v1.1.65/data/kegg_atlas.rda")
-                           attach(kegg_atlas)
+                           data(kegg_atlas)
                           g1<-kegg_atlas
-                          detach("kegg_atlas")
+                          rm(kegg_atlas)
                         }
                         
                       }

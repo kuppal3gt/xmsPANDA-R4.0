@@ -7,7 +7,7 @@ function(X,Y,feature_table_file,parentoutput_dir,class_labels_file,
   
   analysistype=study.design
   
-  if(is.na(X)==TRUE){
+  if(is.na(X)[1]==TRUE){
     data_matrix<-read.table(feature_table_file,sep="\t",header=TRUE,stringsAsFactors=FALSE,check.names=FALSE)
     
   }else{
@@ -197,7 +197,7 @@ function(X,Y,feature_table_file,parentoutput_dir,class_labels_file,
   
   classlabels<-classlabels_orig
   
-  if(is.na(col_vec)==TRUE)
+  if(is.na(col_vec)[1]==TRUE)
   {
     if(sample.col.opt=="default"){
       

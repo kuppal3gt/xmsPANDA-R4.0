@@ -28,48 +28,7 @@ function(X,samplelabels,legendlocation="topright",filename=NA,ncomp=5,pcacenter=
   }
   
   
-if(FALSE){
-  
-  if(dim(classlabelsorig)[2]==2){
-    X=X[order(classlabelsorig[,2]),]
-    samplelabels<-samplelabels[order(classlabelsorig[,2])]
-    classlabelsorig<-classlabelsorig[order(classlabelsorig[,2]),]
-    
-  }else{
-    
-    
-    if(dim(classlabelsorig)[2]==3){
-      
-      
-      if(analysistype=="twowayrepeat" | analysistype=="2wayrepeat" | analysistype=="2way" | analysistype=="twoway"){
-        
-        X=X[order(classlabelsorig[,2],classlabelsorig[,3]),]
-        samplelabels<-samplelabels[order(classlabelsorig[,2],classlabelsorig[,3])]
-        classlabelsorig<-classlabelsorig[order(classlabelsorig[,2],classlabelsorig[,3]),]
-        
-      }else{
-        X=X[order(classlabelsorig[,2]),]
-        samplelabels<-samplelabels[order(classlabelsorig[,2])]
-        classlabelsorig<-classlabelsorig[order(classlabelsorig[,2]),]
-        
-      }
-      
-    }else{
-      if(analysistype=="twowayrepeat" | analysistype=="2wayrepeat" | analysistype=="2way" | analysistype=="twoway"){
-        
-        X=X[order(classlabelsorig[,2],classlabelsorig[,3]),]
-        samplelabels<-samplelabels[order(classlabelsorig[,2],classlabelsorig[,3])]
-        classlabelsorig<-classlabelsorig[order(classlabelsorig[,2],classlabelsorig[,3]),]
-        
-      }else{
-        X=X[order(classlabelsorig[,2]),]
-        samplelabels<-samplelabels[order(classlabelsorig[,2])]
-        classlabelsorig<-classlabelsorig[order(classlabelsorig[,2]),]
-        
-      }
-    }
-  }
-}
+
   
   classlabelsorig<-classlabelsorig[match(rownames(X),classlabelsorig[,1]),]
   
@@ -83,7 +42,7 @@ if(FALSE){
   col_all=topo.colors(256)
   
   t1<-table(samplelabels)
-  if(is.na(class_levels)==TRUE){
+  if(is.na(class_levels)[1]==TRUE){
     
     l1<-levels(as.factor(samplelabels))
   }else{
@@ -130,13 +89,13 @@ if(FALSE){
   if(analysistype=="regression"){
     
   }
- # save(X,result,samplelabels,ellipse.conf.level,classlabelsorig,analysistype,file="pcadebug3.Rda")
+ save(X,result,ncomp,pcacenter,pcascale,samplelabels,ellipse.conf.level,classlabelsorig,analysistype,file="pcadebug3.Rda")
   
  
   
-  s1<-summary(result)
-  r1<-s1$importance[2,]
-  r1<-round(r1,2)*100
+#  s1<-summary(result)
+  r1<-result$prop_expl_var #s1$importance[2,]
+  r1<-round(r1$X,2)*100
   
   barplot(r1,beside=TRUE,main="% variation explained by each component",ylab="% variation",col=c("#0072B2"),cex.main=0.7,ylim=range(pretty(c(0,max(r1)))))
   abline(h=10,lty=5,lwd=2)
@@ -144,7 +103,7 @@ if(FALSE){
   ncomp_plot<-max(2,length(which(r1>10)))
   numcomp_plot<-ncomp_plot
  
-  if(is.na(col_vec)==TRUE){
+  if(is.na(col_vec)[1]==TRUE){
     col_vec<-c("mediumpurple4","mediumpurple1","blueviolet","darkblue","blue","cornflowerblue","cyan4","skyblue",
                "darkgreen", "seagreen1", "green","yellow","orange","pink", "coral1", "palevioletred2",
                "red","saddlebrown","brown","brown3","white","darkgray","aliceblue",
@@ -476,7 +435,7 @@ if(FALSE){
     iqr_xlim=0.1*sd(result$variates$X[,1],na.rm=TRUE) #4*(summary(result$variates$X[,1])[5]-summary(result$variates$X[,1])[3])
     iqr_ylim=0.1*sd(result$variates$X[,2],na.rm=TRUE) #4*(summary(result$variates$X[,2])[5]-summary(result$variates$X[,2])[3])
     
-    #save(X,result,samplelabels,ellipse.conf.level,iqr_ylim,iqr_xlim,r1,classlabelsorig,col_per_group,main_text,analysistype,l1,pch,file="debug3.Rda")
+    save(X,result,samplelabels,ellipse.conf.level,iqr_ylim,iqr_xlim,r1,classlabelsorig,col_per_group,main_text,analysistype,l1,pch,file="debug3.Rda")
     
     plotIndiv(result,comp=c(1,2),group=as.factor(samplelabels),legend = TRUE,
     ellipse=pca.ellipse,style="lattice",

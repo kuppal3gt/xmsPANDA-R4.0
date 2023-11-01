@@ -7,7 +7,7 @@ suppressMessages(require(shiny))
                                   suppressMessages(require(shinyBS))
                                                    suppressMessages(require(DT))
 
-                                                   suppressMessages(source("R/source_codes/xmsPANDA_v1.0.9.39.R"))
+                                                   suppressMessages(source("R/source_codes/xmsPANDA_v1.0.9.54.R"))
 
 # Server logic
 

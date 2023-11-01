@@ -11,13 +11,13 @@ function(Xmat=NA,Ymat=NA,feature_table_file=NA,parentoutput_dir,class_labels_fil
   options(warn=-1)
   
   #read file; First row is column headers
-  if(is.na(Xmat)==TRUE){
+  if(is.na(Xmat)[1]==TRUE){
     data_matrix<-read.table(feature_table_file,sep="\t",header=TRUE,stringsAsFactors=FALSE,check.names=FALSE)
   }else{
     data_matrix<-Xmat
     #rm(Xmat)
   }
-  
+  dir.create(parentoutput_dir,showWarnings = FALSE)
   setwd(parentoutput_dir)
   
   if(create.new.folder==TRUE){
@@ -315,7 +315,7 @@ function(Xmat=NA,Ymat=NA,feature_table_file=NA,parentoutput_dir,class_labels_fil
     
     data_matrix={}
     
-    if(is.na(Ymat)==TRUE){
+    if(is.na(Ymat)[1]==TRUE){
       classlabels<-read.table(class_labels_file,sep="\t",header=TRUE,stringsAsFactors = FALSE,check.names = FALSE)
     }else{
       classlabels<-Ymat
@@ -377,7 +377,7 @@ function(Xmat=NA,Ymat=NA,feature_table_file=NA,parentoutput_dir,class_labels_fil
     
   }else
   {
-    if(is.na(Ymat)==TRUE)
+    if(is.na(Ymat)[1]==TRUE)
     {
       classlabels<-rep("A",dim(data_m)[2])
       classlabels<-as.data.frame(classlabels)
@@ -447,7 +447,7 @@ function(Xmat=NA,Ymat=NA,feature_table_file=NA,parentoutput_dir,class_labels_fil
   
   rnames_xmat<-colnames(data_matrix[,-c(1:2)])
   
-  if(is.na(classlabels)==FALSE){
+  if(is.na(classlabels)[1]==FALSE){
     
     
     rnames_ymat<-as.character(classlabels[,1])

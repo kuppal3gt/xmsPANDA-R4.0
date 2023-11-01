@@ -16,11 +16,11 @@ function(Xmat=NA,Ymat=NA,Zmat=NA,feature_table_file=NA,parentoutput_dir,class_la
   suppressMessages(require(WGCNA))
   
   parallel:::setDefaultClusterOptions(setup_strategy = "sequential")
-  if(is.na(Xmat)==TRUE){
+  if(is.na(Xmat)[1]==TRUE){
     Xmat<-read.table(feature_table_file,sep="\t",header=TRUE,stringsAsFactors=FALSE,check.names=FALSE)
   }
   
-  if(is.na(Ymat)==TRUE){
+  if(is.na(Ymat)[1]==TRUE){
     Ymat<-read.table(class_labels_file,sep="\t",header=TRUE)
   }
   

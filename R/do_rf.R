@@ -26,7 +26,7 @@ function(X,classlabels, ntrees=1000, analysismode="classification"){
   varimp_res<-randomForest::importance(rf2,type=1,scale=FALSE)
   varimp_res_scaled<-randomForest::importance(rf2,type=1,scale=TRUE)
   rm(dataA)
-  detach("dataA")
+  
   #return(varimp_res)
   return(list("rf_model"=rf2,"rf_varimp"=varimp_res,"rf_varimp_scaled"=varimp_res_scaled))
 }

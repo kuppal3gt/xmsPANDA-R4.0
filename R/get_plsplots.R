@@ -21,7 +21,7 @@ function(X,plsres,plsvar,samplelabels,filename=NA,ncomp=5,center=TRUE,scale=TRUE
   t1<-table(samplelabels)
   t1=t1[which(t1>0)]
   
-  if(is.na(class_levels)==TRUE){
+  if(is.na(class_levels)[1]==TRUE){
     
     l1<-levels(as.factor(samplelabels))
   }else{
@@ -34,7 +34,7 @@ function(X,plsres,plsvar,samplelabels,filename=NA,ncomp=5,center=TRUE,scale=TRUE
   
   ncomp=min(dim(X)[1],dim(X)[2])
   
-  if(is.na(col_vec)==TRUE){
+  if(is.na(col_vec)[1]==TRUE){
     col_vec<-c("mediumpurple4","mediumpurple1","blueviolet","darkblue","blue","cornflowerblue","cyan4","skyblue",
                "darkgreen", "seagreen1", "green","yellow","orange","pink", "coral1", "palevioletred2",
                "red","saddlebrown","brown","brown3","white","darkgray","aliceblue",

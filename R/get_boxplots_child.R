@@ -1,7 +1,9 @@
 get_boxplots_child <-
-function(X,Y,feature_table_file,parentoutput_dir,class_labels_file,boxplot.col.opt="journal",alphacol=0.3,newdevice=TRUE,cex.plots=0.8,replace.by.NA=FALSE,
+function(X,Y,feature_table_file,parentoutput_dir,class_labels_file,
+                             boxplot.col.opt="journal",alphacol=0.3,newdevice=TRUE,cex.plots=0.4,replace.by.NA=FALSE,
                              pairedanalysis=FALSE,filename="",ylabel="Intensity",xlabel=NA,
-                             alphabetical.order=FALSE,name=NA,add.jitter=TRUE,add.pvalues=TRUE,class.levels=NA,fill.plots=FALSE,connectpairedsamples=FALSE,
+                             alphabetical.order=FALSE,name=NA,add.jitter=TRUE,add.pvalues=TRUE,
+                             class.levels=NA,fill.plots=FALSE,connectpairedsamples=FALSE,
                              boxplot.type="ggplot",
                              study.design=c("multiclass","onewayanova","twowayanova","onewayanovarepeat",
                                                                   "twowayanovarepeat"),
@@ -9,8 +11,11 @@ function(X,Y,feature_table_file,parentoutput_dir,class_labels_file,boxplot.col.o
                              ggplot.type1=TRUE,replace.outliers=FALSE,plot.height=8,plot.width=8,
                              extra_text=NA,group_by_mat=NA,position_dodge_width=0.75,
                              numnodes=2,hightlight.points=FALSE,ref.group.val=FALSE,facet.nrow=NULL,facet.ncol=NULL,
-                             ylim.val=NA,remove.xaxis.labels=FALSE,boxplot.lwd=1,axis.ticks.size=1.5,axis.line.size=2,jitter.size=2,boxplot.strip.position = "top",legend.all.pages=TRUE,
-                             pval.reporting.method="anova",replace.by.median=FALSE,pval.table.report=FALSE,subset.factor1=NA,subset.factor2=NA,asterisk.size=6,posthoc.multcomp.test="bonferroni",...)
+                             ylim.val=NA,remove.xaxis.labels=FALSE,boxplot.lwd=1,axis.ticks.size=1.5,
+                             axis.line.size=2,jitter.size=2,boxplot.strip.position = "top",legend.all.pages=TRUE,
+                             pval.reporting.method="anova",
+                             replace.by.median=FALSE,pval.table.report=FALSE,
+                             subset.factor1=NA,subset.factor2=NA,asterisk.size=6,posthoc.multcomp.test="bonferroni",...)
 {
   options(warn=-1)
   analysistype=study.design[1]
@@ -821,7 +826,7 @@ function(X,Y,feature_table_file,parentoutput_dir,class_labels_file,boxplot.col.o
               }else{
                 geom_col_vec=(col_vec[1:length(class_labels_levels)])
                 
-                p<-p + geom_boxplot(alpha=alphacol,outlier.shape=NA,lwd=boxplot.lwd) #,colour=geom_col_vec)
+                p<-p + geom_boxplot(alpha=alphacol,lwd=boxplot.lwd) #,colour=geom_col_vec) #outlier.shape=NA,
                 
               }
             }

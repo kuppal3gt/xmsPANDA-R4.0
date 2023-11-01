@@ -134,11 +134,11 @@ function(Xmat=NA,Ymat=NA,feature_table_file,parentoutput_dir=NA,class_labels_fil
     parentoutput_dir=getwd()
   }
   
-  if(is.na(Xmat)==FALSE){
+  if(is.na(Xmat)[1]==FALSE){
     
     feature_table_file=NA
   }
-  if(is.na(Ymat)==FALSE){
+  if(is.na(Ymat)[1]==FALSE){
     
     class_labels_file=NA
   }
@@ -1130,8 +1130,11 @@ function(Xmat=NA,Ymat=NA,feature_table_file,parentoutput_dir=NA,class_labels_fil
             get_boxplots(X=Xmat,Y=Ymat,parentoutput_dir=outloc,sample.col.opt=sample.col.opt,
                          boxplot.col.opt=boxplot.col.opt, newdevice=FALSE,
                          cex.plots=cex.plots,ylabel=ylab_text,alphabetical.order=alphabetical.order,
-                         boxplot.type=boxplot.type,study.design=analysistype,multiple.figures.perpanel=multiple.figures.perpanel,ggplot.type1=ggplot.type1,facet.nrow=facet.nrow,
-                         boxplot.strip.position ="bottom",remove.xaxis.labels=TRUE,replace.outliers =FALSE)
+                         boxplot.type=boxplot.type,study.design=analysistype,
+                         multiple.figures.perpanel=multiple.figures.perpanel,
+                         ggplot.type1=ggplot.type1,facet.nrow=facet.nrow,
+                         boxplot.strip.position ="bottom",remove.xaxis.labels=TRUE,
+                         replace.outliers =FALSE)
             
             
             

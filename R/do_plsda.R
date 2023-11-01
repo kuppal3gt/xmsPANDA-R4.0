@@ -750,7 +750,7 @@ function(X,Y,oscmode="pls",numcomp=3,kfold=10,evalmethod="CV",keepX=15,sparsesel
     col_all=topo.colors(256)
     
     t1<-table(samplelabels)
-    if(is.na(class_labels_levels)==TRUE){
+    if(is.na(class_labels_levels)[1]==TRUE){
       
       l1<-levels(as.factor(samplelabels))
     }else{

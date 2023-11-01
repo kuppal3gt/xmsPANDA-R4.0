@@ -1,12 +1,8 @@
 metabnet <-
-function(feature_table_file,target.metab.file,sig.metab.file,class_labels_file=NA,
-         parentoutput_dir,num_replicates=1,cor.method="spearman",abs.cor.thresh=0.4,cor.fdrthresh=0.05,
-                   target.mzmatch.diff=10,target.rtmatch.diff=NA,max.cor.num=100,feat.filt.thresh=NA,
-         summarize.replicates=TRUE,summary.method="mean",all.missing.thresh=0.5, group.missing.thresh=0.7,
+function(feature_table_file,target.metab.file,sig.metab.file,class_labels_file=NA,parentoutput_dir,num_replicates=1,cor.method="spearman",abs.cor.thresh=0.4,cor.fdrthresh=0.05,
+                   target.mzmatch.diff=10,target.rtmatch.diff=NA,max.cor.num=100,feat.filt.thresh=NA,summarize.replicates=TRUE,summary.method="mean",all.missing.thresh=0.5, group.missing.thresh=0.7,
                    missing.val=0, networktype="complete", samplermindex=NA,
-                   rep.max.missing.thresh=0.3,summary.na.replacement="zeros",
-         net_node_colors=c("pink","skyblue"),net_legend=FALSE,netrandseed=555,
-         normalization.method=c("none"),
+                   rep.max.missing.thresh=0.3,summary.na.replacement="zeros",net_node_colors=c("pink","skyblue"),net_legend=FALSE,netrandseed=555,normalization.method=c("none"),
                    input.intensity.scale="raw",log2.transform.constant=1,...){
   
   options(warn=-1)
