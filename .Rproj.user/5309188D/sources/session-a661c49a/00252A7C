@@ -3,7 +3,7 @@
     "path": "~/xmsPANDA/xmsPANDA-R4.0/NAMESPACE",
     "project_path": "NAMESPACE",
     "type": "r_namespace",
-    "hash": "0",
+    "hash": "4279493326",
     "contents": "",
     "dirty": false,
     "created": 1698817813163.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "0,0",
+        "cursorPosition": "7,42",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1697767638,
+    "lastKnownWriteTime": 1698818062,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1697767638,
+    "last_content_update": 1698818062056,
     "read_only": false,
     "read_only_alternatives": []
 }
