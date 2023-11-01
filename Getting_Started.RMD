@@ -67,7 +67,6 @@ outloc<-paste0(getwd(),"/xmsPANDAliteout/")
 Xmat<-read.table(feature_table_file,sep="\t",header=TRUE,stringsAsFactors = FALSE,check.names = FALSE)
 Ymat<-read.table(class_labels_file,sep="\t",header=TRUE,stringsAsFactors = FALSE,check.names = FALSE)
 
-outloc=getwd()
 
 #limma
 demetabs_reslite1<-diffexp.lite(Xmat=Xmat,Ymat=Ymat,outloc=outloc,featselmethod="limma",normalization.method = "log2transform",
