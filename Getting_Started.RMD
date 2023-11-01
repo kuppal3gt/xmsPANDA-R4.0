@@ -1,6 +1,8 @@
 ---
 title: "xmsPANDA_getting_started"
-output: html_document
+output:
+  html_document:
+    toc: true
 date: "2023-10-31"
 ---
 
@@ -8,8 +10,9 @@ date: "2023-10-31"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Install dependencies
+# This Notebook includes steps for installing xmsPANDA v1.4.0 and it's dependencies. v1.4.0 of xmsPANDA includes updates to make it compatible with R 4.0 and higher. 
 
+## Install dependencies
 
 
 ```{r, echo=FALSE}
@@ -33,7 +36,7 @@ install.packages(c('rgl', 'snow', 'doSNOW', 'foreach', 'e1071', 'WGCNA','reshape
 
 
 Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="true")
-library(devtools); install_github("kuppal2/xmsPANDA")
+library(devtools); install_github("kuppal3gt/xmsPANDA-R4.0")
 
 ```
 
@@ -42,7 +45,7 @@ library(devtools); install_github("kuppal2/xmsPANDA")
 
 ```{r,echo=FALSE}
 #launch xmsPANDA
-#suppressPackageStartupMessages(library(xmsPANDA))
+suppressPackageStartupMessages(library(xmsPANDA))
 
 #run the Lite version
 runApp.xmsPANDALite()
@@ -75,5 +78,3 @@ demetabs_reslite_1and2<-merge(demetabs_reslite1$diffexp_metabs[,c("Name","P.valu
 
 
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
