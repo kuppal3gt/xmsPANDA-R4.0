@@ -14,7 +14,7 @@ ui<-fluidPage(
     tags$head(
       tags$meta(charset="utf-8"),
       tags$meta(name="description",content="Free Web tutorials"),
-      tags$title("xmsPANDA - 1.3.2 (Lite)"),
+      tags$title("xmsPANDA - 1.4.0 Beta (Lite)"),
       tags$link(rel = "stylesheet", type = "text/css", href = "mystyle.css")
     ),
     column(12,

@@ -1,3 +1,4 @@
+#
 diffexp.lite <-
 function(Xmat=NA,Ymat=NA,outloc=NA,
                   summary.na.replacement="halffeaturemin",missing.val=0,

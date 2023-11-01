@@ -1,3 +1,4 @@
+#
 get_fcs <-
 function(target.data,target.data.annot=NA,kegg_species_code="hsa",database="pathway",
                   reference_set=NA,type.statistic=c("pvalue","t-statistic","fold.change","VIP"),fcs.min.hits=2,itrs=100, numnodes=2){
@@ -9,13 +10,7 @@ function(target.data,target.data.annot=NA,kegg_species_code="hsa",database="path
   suppressMessages(library('KEGGREST'))
   
   colnames(target.data)<-c("XID","Statistic")
-  
- # print(fcs.min.hits)
-  #print(itrs)
- # print(numnodes)
-  #print(head(target.data))
-  #print(head(reference_set))
-  #print(type.statistic)
+
   
   count.unique.formula.overlapsize=TRUE
   dup.feature.check=TRUE

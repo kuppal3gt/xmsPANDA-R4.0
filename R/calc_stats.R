@@ -1,3 +1,4 @@
+#
 calc_stats <-
 function(tabble, prevalence = NULL, positive, ...) {
   # checks
