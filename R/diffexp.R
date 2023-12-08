@@ -1,4 +1,3 @@
-#
 diffexp <-
 function(Xmat=NA,Ymat=NA,feature_table_file,parentoutput_dir=NA,class_labels_file,num_replicates=1,summarize.replicates=TRUE,summary.method="mean",
                   summary.na.replacement="zeros",missing.val=0,rep.max.missing.thresh=0.3,
@@ -48,6 +47,7 @@ function(Xmat=NA,Ymat=NA,feature_table_file,parentoutput_dir=NA,class_labels_fil
   time_start<-Sys.time()
   options(warn=-1)
   
+  runtime_wd<-getwd()
   
   print("**")
   print("**")
@@ -1434,4 +1434,7 @@ function(Xmat=NA,Ymat=NA,feature_table_file,parentoutput_dir=NA,class_labels_fil
     
     
   }
-}
+
+  
+  setwd(runtime_wd)
+  }

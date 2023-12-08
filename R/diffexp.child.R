@@ -460,7 +460,10 @@ function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labels_file,num_rep
       if(length(check_names1)<1 || length(check_names2)<1){
         stop("Invalid feature table format. The format should be either Name in column A or mz and time in columns A and B. Please check example files.")			
       }
-      X<-X[order(X[,c(1,2)]),]
+      
+      #X<-X[order(X[,c(1,2)]),]
+      
+       X<-X[order(X[,c("mz")]),]
       X[,1]<-round(X[,1],5)
       X[,2]<-round(X[,2],2)
       
