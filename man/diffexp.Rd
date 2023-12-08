@@ -13,10 +13,6 @@ summary.method="mean",summary.na.replacement="zeros",missing.val=0,
 rep.max.missing.thresh=0.3,
  all.missing.thresh=0.1,group.missing.thresh=0.7,
 input.intensity.scale="raw",
-log2transform=FALSE,medcenter=FALSE,znormtransform=FALSE,
-quantile_norm=FALSE,lowess_norm=FALSE,madscaling=FALSE,TIC_norm=FALSE,
-rangescaling=FALSE,mstus=FALSE,paretoscaling=FALSE,sva_norm=FALSE,
-eigenms_norm=FALSE,vsn_norm=FALSE,
 normalization.method=c("log2transform"),rsd.filt.list=1,
 pairedanalysis=FALSE,featselmethod=c("limma","pls"),fdrthresh=0.05,
 fdrmethod="BH",cor.method="spearman",networktype="complete",
@@ -205,7 +201,7 @@ for two-way repeated measures (mode= regression or classification)
 (mode= regression or classification)
 }
 \item{pvalue.thresh}{
-p-value threshold. Eg: 0.05^M
+p-value threshold. Eg: 0.05
 }
 \item{fdrthresh}{
 False discovery rate threshold. Eg: 0.05
