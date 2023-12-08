@@ -9387,7 +9387,7 @@ get_classification.accuracy<-function(kfold,featuretable,classlabels,kernelname=
     mz_time<-paste(round(featuretable[,1],5),"_",round(featuretable[,2],2),sep="")
   }
   
-  if(is.na(column.rm.index)==FALSE){
+  if(is.na(column.rm.index)[1]==FALSE){
     x=t(featuretable[,-c(column.rm.index)])
   }else{
     
@@ -9402,7 +9402,7 @@ get_classification.accuracy<-function(kfold,featuretable,classlabels,kernelname=
     
     print("Note: the order of features/variables should be same in the train and test sets.")
     
-    if(is.na(column.rm.index)==FALSE){
+    if(is.na(column.rm.index)[1]==FALSE){
       testfeaturetable<-t(testfeaturetable[,-c(column.rm.index)])
     }else{
       
@@ -9626,7 +9626,7 @@ get_classification.accuracy_vold<-function(kfold,featuretable,classlabels,kernel
     mz_time<-paste(round(featuretable[,1],5),"_",round(featuretable[,2],2),sep="")
   }
   
-  if(is.na(column.rm.index)==FALSE){
+  if(is.na(column.rm.index)[1]==FALSE){
     x=t(featuretable[,-c(column.rm.index)])
   }else{
     
@@ -9641,7 +9641,7 @@ get_classification.accuracy_vold<-function(kfold,featuretable,classlabels,kernel
     
     print("Note: the order of features/variables should be same in the train and test sets.")
     
-    if(is.na(column.rm.index)==FALSE){
+    if(is.na(column.rm.index)[1]==FALSE){
       testfeaturetable<-t(testfeaturetable[,-c(column.rm.index)])
     }else{
       
@@ -26865,7 +26865,7 @@ outlier_detect<-function(data_matrix,ncomp=2,pthresh=0.005,outlier.method=c("pco
   if(outlier.method=="sumtukey"){
     
     
-    if(is.na(column.rm.index)==FALSE){
+    if(is.na(column.rm.index)[1]==FALSE){
       s2=apply(data_matrix[,-c(column.rm.index)],2,function(x){sum(x,na.rm=TRUE)})
       cnames<-colnames(data_matrix[,-c(column.rm.index)])
     }else{
@@ -26881,7 +26881,7 @@ outlier_detect<-function(data_matrix,ncomp=2,pthresh=0.005,outlier.method=c("pco
     
   }
   else{
-  if(is.na(column.rm.index)==FALSE){
+  if(is.na(column.rm.index)[1]==FALSE){
   p1<-mixOmics::pca(t(data_matrix[,-c(column.rm.index)]),center=TRUE,scale=TRUE,ncomp=ncomp)
   cnames<-colnames(data_matrix[,-c(column.rm.index)])
   }else{
@@ -30870,26 +30870,25 @@ diffexp.lite<-function(Xmat=NA,Ymat=NA,outloc=NA,
  # sink(fname)
 #  print(sessionInfo())
   analysistype="oneway"
-
-  if(length(featselmethod)==1){
-          if(featselmethod=="limma2way" | featselmethod=="lm2wayanova" | featselmethod=="spls2way"){
-            analysistype="twowayanova"
-          }else{
-            
-            if(featselmethod=="limma2wayrepeat" | featselmethod=="lm2wayanovarepeat" | featselmethod=="spls2wayrepeat"){
-              analysistype="twowayrepeat"
-              pairedanalysis=TRUE
-            }else{
-              
-              if(featselmethod=="limma1wayrepeat" | featselmethod=="lm1wayanovarepeat" | featselmethod=="spls1wayrepeat"){
-                analysistype="onewayrepeat"
-                pairedanalysis=TRUE
-              }
-              
-            }
-            
-          }
+  
+  if(featselmethod=="limma2way" | featselmethod=="lm2wayanova" | featselmethod=="spls2way"){
+    analysistype="twowayanova"
+  }else{
+    
+    if(featselmethod=="limma2wayrepeat" | featselmethod=="lm2wayanovarepeat" | featselmethod=="spls2wayrepeat"){
+      analysistype="twowayrepeat"
+      pairedanalysis=TRUE
+    }else{
+      
+      if(featselmethod=="limma1wayrepeat" | featselmethod=="lm1wayanovarepeat" | featselmethod=="spls1wayrepeat"){
+        analysistype="onewayrepeat"
+        pairedanalysis=TRUE
+      }
+      
+    }
+    
   }
+  
   if(length(featselmethod)>1){
     
     if(length(rsd.filt.list)>1){
@@ -31150,6 +31149,7 @@ diffexp<-function(Xmat=NA,Ymat=NA,feature_table_file,parentoutput_dir=NA,class_l
   time_start<-Sys.time()
   options(warn=-1)
   
+  runtime_wd<-getwd()
   
   print("**")
   print("**")
@@ -32536,7 +32536,10 @@ diffexp<-function(Xmat=NA,Ymat=NA,feature_table_file,parentoutput_dir=NA,class_l
     
     
   }
-}
+
+  
+  setwd(runtime_wd)
+  }
 
 #Xmat: 
 #column A: X-axis data (e.g. group labels)
@@ -33174,7 +33177,10 @@ diffexp.child<-function(Xmat,Ymat,feature_table_file,parentoutput_dir,class_labe
       if(length(check_names1)<1 || length(check_names2)<1){
         stop("Invalid feature table format. The format should be either Name in column A or mz and time in columns A and B. Please check example files.")			
       }
-      X<-X[order(X[,c(1,2)]),]
+      
+      #X<-X[order(X[,c(1,2)]),]
+      
+       X<-X[order(X[,c("mz")]),]
       X[,1]<-round(X[,1],5)
       X[,2]<-round(X[,2],2)
       
