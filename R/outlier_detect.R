@@ -6,7 +6,7 @@ function(data_matrix,ncomp=2,pthresh=0.005,outlier.method=c("pcout","sumtukey","
   if(outlier.method=="sumtukey"){
     
     
-    if(is.na(column.rm.index)==FALSE){
+    if(is.na(column.rm.index)[1]==FALSE){
       s2=apply(data_matrix[,-c(column.rm.index)],2,function(x){sum(x,na.rm=TRUE)})
       cnames<-colnames(data_matrix[,-c(column.rm.index)])
     }else{
@@ -22,7 +22,7 @@ function(data_matrix,ncomp=2,pthresh=0.005,outlier.method=c("pcout","sumtukey","
     
   }
   else{
-  if(is.na(column.rm.index)==FALSE){
+  if(is.na(column.rm.index)[1]==FALSE){
   p1<-mixOmics::pca(t(data_matrix[,-c(column.rm.index)]),center=TRUE,scale=TRUE,ncomp=ncomp)
   cnames<-colnames(data_matrix[,-c(column.rm.index)])
   }else{
