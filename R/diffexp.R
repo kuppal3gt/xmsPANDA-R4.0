@@ -563,6 +563,8 @@ function(Xmat=NA,Ymat=NA,feature_table_file,parentoutput_dir=NA,class_labels_fil
   print(sessionInfo())
   analysistype="oneway"
   
+  if(length(featselmethod)==1){
+  
   if(featselmethod=="limma2way" | featselmethod=="lm2wayanova" | featselmethod=="spls2way"){
     analysistype="twowayanova"
   }else{
@@ -579,6 +581,7 @@ function(Xmat=NA,Ymat=NA,feature_table_file,parentoutput_dir=NA,class_labels_fil
       
     }
     
+  }
   }
   
   if(length(featselmethod)>1){
