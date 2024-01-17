@@ -1,4 +1,3 @@
-#
 diffexpcoxph <-
 function(dataA,logistic_reg=FALSE,poisson_reg=FALSE,vcovHC.type="HC3"){
   

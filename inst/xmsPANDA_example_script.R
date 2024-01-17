@@ -3,9 +3,9 @@
 suppressPackageStartupMessages(library(xmsPANDA))
 
 #change the input and output locations
-feature_table_file<-"https://raw.githubusercontent.com/kuppal3gt/xmsPANDA-R4.0/main/inst/shinyapp/example_data/exh1n1_metabolome.txt"
-class_labels_file<-"https://raw.githubusercontent.com/kuppal3gt/xmsPANDA-R4.0/main/inst/shinyapp/example_data/exh1n1_classlabels.txt"
-outloc<-paste0(getwd(),"/xmsPANDAv1.4.0out/")
+feature_table_file<-"~/exh1n1_metabolome.txt"
+class_labels_file<-"~/exh1n1_classlabels.txt"
+outloc<-"~/test/"
 
 
 #start: see manual for additional arguments and description

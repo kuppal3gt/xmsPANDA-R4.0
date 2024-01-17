@@ -1,4 +1,3 @@
-#
 confusion_matrix2 <-
 function(
   prediction,

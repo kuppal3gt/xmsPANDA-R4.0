@@ -1,4 +1,3 @@
-#
 get_lineplots <-
 function(X=NA,Y=NA,feature_table_file=NA,parentoutput_dir=NA,
                         class_labels_file=NA,alphacol=0.3,col_vec=NA,pairedanalysis=FALSE,

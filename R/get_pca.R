@@ -1,4 +1,3 @@
-#
 get_pca <-
 function(X,samplelabels,legendlocation="topright",filename=NA,ncomp=5,pcacenter=TRUE,pcascale=TRUE,legendcex=0.5,
                   outloc=getwd(),col_vec=NA,sample.col.opt="default",alphacol=0.3,class_levels=NA,pca.cex.val=3,pca.ellipse=TRUE,

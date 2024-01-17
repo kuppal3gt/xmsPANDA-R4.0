@@ -1,4 +1,3 @@
-#
 get_boxplots_child <-
 function(X,Y,feature_table_file,parentoutput_dir,class_labels_file,
                              boxplot.col.opt="journal",alphacol=0.3,newdevice=TRUE,cex.plots=0.4,replace.by.NA=FALSE,

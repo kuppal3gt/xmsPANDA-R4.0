@@ -1,4 +1,3 @@
-#
 diffexplmregrepeat <-
 function(dataA,subject_inf,modeltype="lme.RIRS",covar.matrix=NA){
   

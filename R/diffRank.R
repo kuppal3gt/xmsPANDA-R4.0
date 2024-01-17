@@ -1,4 +1,3 @@
-#
 diffRank <-
 function(adjMtrxSample1,adjMtrxSample2,degree.centrality.method="eigenvector",node_names=NA,class_labels=c(1,2),
                    plot_graph_bool=FALSE,label.cex=0.5,vertex.size=0.7,ignore.edge.weights=FALSE)

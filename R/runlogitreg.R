@@ -1,4 +1,3 @@
-#
 runlogitreg <-
 function(X,Y,fdrmethod="BH",fdrthresh=0.05,pvalue.thresh=0.05,robust.estimate=FALSE){
   options(warn=-1)

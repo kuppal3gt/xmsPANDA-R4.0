@@ -1,4 +1,3 @@
-#
 diffexponewayanova <-
 function(dataA,covar.matrix=NA){
   

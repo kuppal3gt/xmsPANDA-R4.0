@@ -1,9 +1,9 @@
-#
 diffexplmreg <-
 function(dataA,logistic_reg=FALSE,poisson_reg=FALSE,robust.estimate=FALSE,vcovHC.type="HC3"){
   
   dataA<-as.data.frame(dataA)
- 
+  
+  ###savedataA,file="lmreg_func.Rda")
   if(logistic_reg==TRUE){
     cnames1<-colnames(dataA)
     cnames1[2]<-"Class"

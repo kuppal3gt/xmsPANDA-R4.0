@@ -1,4 +1,3 @@
-#
 diffexplogitreg <-
 function(dataA){
   
@@ -6,7 +5,7 @@ function(dataA){
   
   labels_1<-labels(as.factor(dataA$Factor1))
   
-  
+  #print(labels_1)
   dataA$Factor1<-replace(dataA$Factor1,which(dataA$Factor1==labels_1[1]),0)
   dataA$Factor1<-replace(dataA$Factor1,which(dataA$Factor1==labels_1[2]),1)
   
@@ -14,11 +13,11 @@ function(dataA){
   
   c1<-confint(a1,level=0.95)
   s1<-summary(a1)
-  
+  #print(summary(a1))
   
   anova_res<-anova(a1)
   num_rows<-dim(anova_res)
- 
+  #pvalues_factors<-data.frame(t(anova_res["Pr(>F)"][-c(num_rows),]))
   
   s1<-s1$coefficients
   s1<-s1[-c(1),]

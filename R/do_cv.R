@@ -1,4 +1,3 @@
-#
 do_cv <-
 function(v,x,y,kname="radial",errortype="CV",conflevel=95,classifier="SVM",seednum=555){
   

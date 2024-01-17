@@ -3,9 +3,9 @@
 suppressPackageStartupMessages(library(xmsPANDA))
 
 #change the input and output locations
-feature_table_file<-"https://raw.githubusercontent.com/kuppal3gt/xmsPANDA-R4.0/main/inst/shinyapp/example_data/exh1n1_metabolome.txt"
-class_labels_file<-"https://raw.githubusercontent.com/kuppal3gt/xmsPANDA-R4.0/main/inst/shinyapp/example_data/exh1n1_classlabels.txt"
-outloc<-paste0(getwd(),"/xmsPANDAliteout/")
+feature_table_file<-"~/exh1n1_metabolome.txt"
+class_labels_file<-"~/exh1n1_classlabels.txt"
+outloc<-"~/xmsPANDAliteout/"
 
 
 Xmat<-read.table(feature_table_file,sep="\t",header=TRUE,stringsAsFactors = FALSE,check.names = FALSE)
@@ -41,11 +41,6 @@ demetabs_reslite7<-diffexp.lite(Xmat=Xmat,Ymat=Ymat,outloc=outloc,featselmethod=
 #TTEST
 demetabs_reslite8<-diffexp.lite(Xmat=Xmat,Ymat=Ymat,outloc=outloc,featselmethod="ttest",normalization.method = "log2transform",fdrthresh=0.05,fdrmethod="none")
 
-
-#TTEST
-demetabs_reslite9<-diffexp.lite(Xmat=Xmat,Ymat=Ymat,outloc=outloc,featselmethod="logitreg",normalization.method = "log2transform",fdrthresh=0.05,fdrmethod="none")
-
-demetabs_reslite10<-diffexp.lite(Xmat=Xmat,Ymat=Ymat2,outloc=outloc,featselmethod="logitreg",normalization.method = "log2transform",fdrthresh=0.05,fdrmethod="none")
 
 
 #####################################################

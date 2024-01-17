@@ -1,4 +1,3 @@
-#
 diffexplmonewayanovarepeat <-
 function(dataA,subject_inf,analysismode="classification",modeltype="RIRS",covar.matrix=NA){
   
@@ -10,6 +9,7 @@ function(dataA,subject_inf,analysismode="classification",modeltype="RIRS",covar.
   Subject<-subject_inf
   dataA<-cbind(dataA,subject_inf)
   
+  ##savedataA,file="dataA.Rda")
 if(FALSE){ 
   if(modeltype=="RI"){
     

@@ -1,4 +1,3 @@
-#
 do_cor <-
 function(data_m_fc_withfeats,subindex=NA,targetindex=NA,outloc,networkscope,cor.method,abs.cor.thresh,cor.fdrthresh,
                  max.cor.num,net_node_colors,net_legend,netrandseed=555,num_nodes=6, plots.width=2000,plots.height=2000,plots.res=300,cex.plots=0.8,newdevice=FALSE){

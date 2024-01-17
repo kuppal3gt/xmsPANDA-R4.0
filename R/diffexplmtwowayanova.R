@@ -1,4 +1,3 @@
-#
 diffexplmtwowayanova <-
 function(dataA,covar.matrix=NA,plot.tukeyhsd=FALSE,var.name=NA){
   dataA<-as.data.frame(dataA)

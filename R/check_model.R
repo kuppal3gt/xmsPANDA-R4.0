@@ -1,4 +1,3 @@
-#
 check_model <-
 function(model.fit,dependent.var){
   

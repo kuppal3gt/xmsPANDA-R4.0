@@ -1,4 +1,3 @@
-#
 compare.normalization <-
 function(Xmat=NA,Ymat=NA,Zmat=NA,feature_table_file=NA,parentoutput_dir,class_labels_file=NA,num_replicates=3,feat.filt.thresh=NA,summarize.replicates=TRUE,summary.method="mean",
                                 all.missing.thresh=0.5,group.missing.thresh=0.7,

@@ -1,4 +1,4 @@
-get_fcs_child <-
+get_fcs_childv1.0.8.50 <-
 function(metab_data,reference_sets,itrs=1000,fcs.min.hits=2,numnodes=2){
   
   
@@ -23,7 +23,7 @@ function(metab_data,reference_sets,itrs=1000,fcs.min.hits=2,numnodes=2){
   
   metab_data_sets<-merge(metab_data,reference_sets,by="XID")
   
-  ##save(metab_data_sets,metab_data,reference_sets,file="metab_data_sets.Rda")
+  #save(metab_data_sets,metab_data,reference_sets,file="metab_data_sets.Rda")
   
   metab_data_sets<-metab_data_sets[order(metab_data_sets$SetID,metab_data_sets$Statistic,decreasing=TRUE),]
   
@@ -54,11 +54,7 @@ function(metab_data,reference_sets,itrs=1000,fcs.min.hits=2,numnodes=2){
     
     set_statistic1=aggregate(metab_data_sets$Statistic,by=list(metab_data_sets$SetID),FUN=function(x){
       x<-as.numeric(as.character(x))
-      # max_mean<-max(abs(mean(x[which(x>0)],na.rm=TRUE)),abs(mean(x[which(x<0)],na.rm=TRUE)),na.rm=TRUE)
-      
-      #max_mean<-max(c((sum(x[which(x>=0)],na.rm=TRUE)/length(x)),((-1)*sum(x[which(x<0)],na.rm=TRUE)/length(x))),na.rm=TRUE)
-      
-      max_mean<-max(c((sum(x[which(x>=0)],na.rm=TRUE)/length(x)),((-1)*sum(x[which(x<0)],na.rm=TRUE)/length(x))),na.rm=TRUE)
+      max_mean<-max(mean(x[which(x>0)],na.rm=TRUE),mean(x[which(x<0)],na.rm=TRUE),na.rm=TRUE)
       
       resv<-c(agg.stat=sum(x,na.rm=TRUE)/length(x),zscore=sqrt(length(x))*sum(x,na.rm=TRUE)/length(x), maxmean=max_mean,numhits=length(x))
       resv<-round(resv,3)
@@ -67,6 +63,7 @@ function(metab_data,reference_sets,itrs=1000,fcs.min.hits=2,numnodes=2){
     set_statistic1<-do.call(data.frame,set_statistic1)
     colnames(set_statistic1)=c("SetID","Agg.Statistic","Z.score","MaxMean","Num.Hits")
     
+    set_statistic1$Z.score<-scale(set_statistic1$MaxMean)
     
     
     #metabset_res<-parLapply(cl,1:length(sid_list),function(c,dup.feature.check,fcs.method,fcs.permutation.type){
@@ -91,24 +88,17 @@ function(metab_data,reference_sets,itrs=1000,fcs.min.hits=2,numnodes=2){
     
     metab_data_sets<-merge(metab_data_sets,set_size,by="SetID")
     
-    
+    #save(metab_data_sets,file="prerand.Rda")
     
     cl<-makeCluster(max(numnodes,detectCores()*0.5))
     #   a=Sys.time()
     randmetabset_res<-parLapply(cl,1:itrs,function(i,metab_data_sets){
       
-      set.seed(i*100)
-      
-      all <- sample(1:nrow(reference_sets),nrow(reference_sets))
-      
-      rand_reference_sets<-reference_sets
-      rand_reference_sets$XID<-rand_reference_sets$XID[all]
-      randmetab_data_sets<-merge(metab_data,rand_reference_sets,by="XID")
-      
-      
-      # randmetab_data_sets<-metab_data_sets
-      #  randmetab_data_sets$Statistic<-metab_data_sets$Statistic[all]
-      # randmetab_data_sets$XID<-metab_data_sets$XID[all]
+      set.seed(i)
+      all <- sample(1:nrow(metab_data_sets),nrow(metab_data_sets))
+      randmetab_data_sets<-metab_data_sets
+      randmetab_data_sets$Statistic<-metab_data_sets$Statistic[all]
+      randmetab_data_sets$XID<-metab_data_sets$XID[all]
       
       #randmetab_data_sets[,1]<-randkeggids
       #randmetab_data_sets[,2]<-randstat
@@ -117,15 +107,8 @@ function(metab_data,reference_sets,itrs=1000,fcs.min.hits=2,numnodes=2){
         
         x<-as.numeric(as.character(x))
         
-        #  max_mean<-max(abs(mean(x[which(x>0)],na.rm=TRUE)),abs(mean(x[which(x<0)],na.rm=TRUE)),na.rm=TRUE)
+        max_mean<-max(mean(x[which(x>0)],na.rm=TRUE),mean(x[which(x<0)],na.rm=TRUE),na.rm=TRUE)
         
-        
-        # max_mean<-max(abs(max(x[which(x>0)],na.rm=TRUE)/length(which(x>0))+1),abs(min(x[which(x<0)],na.rm=TRUE)/length(which(x<0))+1),na.rm=TRUE)
-        
-        
-        #  max_mean<-max(max(x[which(x>0)],na.rm=TRUE)/length(which(x<0)),max(x[which(x<0)],na.rm=TRUE)/length(which(x<0)),na.rm=TRUE)
-        
-        max_mean<-max(c((sum(x[which(x>=0)],na.rm=TRUE)/length(x)),((-1)*sum(x[which(x<0)],na.rm=TRUE)/length(x))),na.rm=TRUE)
         
         resv<-c(agg.stat=sum(x,na.rm=TRUE)/length(x),zscore=sqrt(length(x))*sum(x,na.rm=TRUE)/length(x), maxmean=max_mean)
         
@@ -152,13 +135,9 @@ function(metab_data,reference_sets,itrs=1000,fcs.min.hits=2,numnodes=2){
     
     colnames(randmetabset_res)<-c("SetID","Agg.Statistic","Z.score","MaxMean")
     
-    randset_maxmean=aggregate(randmetabset_res$MaxMean,by=list(randmetabset_res$SetID),FUN=function(x){
-      
-      x<-as.numeric(as.character(x))
-      return(c(meanval=round(mean(x,na.rm=TRUE),3),sdval=round(sd(x,na.rm=TRUE),3)))
-    })
+    randmetabset_res$Z.score<-randmetabset_res$MaxMean
     
-    randset_agg=aggregate(randmetabset_res$Agg.Statistic,by=list(randmetabset_res$SetID),FUN=function(x){
+    randset_maxmean=aggregate(randmetabset_res$MaxMean,by=list(randmetabset_res$SetID),FUN=function(x){
       
       x<-as.numeric(as.character(x))
       return(c(meanval=round(mean(x,na.rm=TRUE),3),sdval=round(sd(x,na.rm=TRUE),3)))
@@ -166,40 +145,45 @@ function(metab_data,reference_sets,itrs=1000,fcs.min.hits=2,numnodes=2){
     
     randset_maxmean<-do.call(data.frame,randset_maxmean)
     
-    randset_agg<-do.call(data.frame,randset_agg)
-    
-    
     colnames(randset_maxmean)<-c("SetID","RandMeanMaxMean","RandSdMaxMean")
-    
-    colnames(randset_agg)<-c("SetID","RandMeanAgg","RandSdAgg")
     
     
     set_statistic1<-merge(set_statistic1,randset_maxmean,by="SetID")
     
-    # set_statistic1<-merge(set_statistic1,randset_agg,by="SetID")
+    MaxMean.Std<-round((set_statistic1$MaxMean-set_statistic1$RandMeanMaxMean)/set_statistic1$RandSdMaxMean,3)
     
-    set_statistic1$Z.score<-round((set_statistic1$Agg.Statistic-mean(set_statistic1$Agg.Statistic,na.rm=TRUE))/sd(set_statistic1$Agg.Statistic,na.rm=TRUE),3)
     
-    MaxMean.Std<-round((set_statistic1$MaxMean-mean(set_statistic1$MaxMean,na.rm=TRUE))/sd(set_statistic1$MaxMean,na.rm=TRUE),3)
     set_statistic1<-cbind(set_statistic1,MaxMean.Std)
     
     randmetabset_res<-merge(randmetabset_res,randset_maxmean,by="SetID")
-    randmetabset_res<-merge(randmetabset_res,randset_agg,by="SetID")
-    
-    RandMaxMean.Std<-(randmetabset_res$MaxMean-mean(randmetabset_res$MaxMean))/sd(randmetabset_res$MaxMean) #randmetabset_res$RandMeanMaxMean)/randmetabset_res$RandSdMaxMean
+    RandMaxMean.Std<-(randmetabset_res$MaxMean-randmetabset_res$RandMeanMaxMean)/randmetabset_res$RandSdMaxMean
     randmetabset_res<-cbind(randmetabset_res,round(RandMaxMean.Std,3))
-    
-    randmetabset_res$Z.score<-(randmetabset_res$Agg.Statistic-randmetabset_res$RandMeanAgg)/randmetabset_res$RandSdAgg
-    
     #set_statistic1A=merge(set_statistic1,set_size,by="SetID")
     #Norm.Agg.Statistic=set_statistic1A$Agg.Statistic/set_statistic1A$Size
     
-    #   #save(set_statistic1,metab_data_sets,randset_maxmean,randmetabset_res,sid_list,file="set_statistic1.Rda")
+    meanp.agg<-function (p)
+    {
+      keep <- (p >= 0) & (p <= 1)
+      invalid <- sum(1L * keep) < 3
+      if (invalid) {
+        warning("Must have at least four valid p values")
+        res <- list(z = NA_real_, p = NA_real_, validp = p[keep])
+      }
+      else {
+        pi <- mean(p[keep])
+        k <- length(p[keep])
+        z <- (0.5 - pi) * sqrt(12 * k)
+        if (k != length(p)) {
+          warning("Some studies omitted")
+        }
+        res <- list(z = z, p = pnorm(z, lower.tail = FALSE),
+                    validp = p[keep])
+      }
+      #class(res) <- c("meanp", "metap")
+      res
+    }
     
-    # set_statistic1$Agg.Statistic<-as.numeric(as.character(set_statistic1$Agg.Statistic))/as.numeric(as.character(metab_data_sets$Total.Size)) 
-    #set_statistic1$Z.score<-as.numeric(as.character(set_statistic1$Z.score))/as.numeric(as.character(metab_data_sets$Total.Size)) 
-    #set_statistic1$MaxMean<-as.numeric(as.character(set_statistic1$MaxMean))/as.numeric(as.character(metab_data_sets$Total.Size))  
-    
+    #save(randmetabset_res,set_statistic1,file="pvaldebug.Rda")
     metabset_res1<-lapply(1:length(sid_list),function(c){
       
       
@@ -208,20 +192,21 @@ function(metab_data,reference_sets,itrs=1000,fcs.min.hits=2,numnodes=2){
       if(nrow(cur_sid_orig)>0){
         pval_agg.stat=length(which(as.numeric(as.character(cur_sid_rand[,2]))>as.numeric(as.character(cur_sid_orig[2]))))/itrs
         
-        #pval_zscore=2*pt(-abs(as.numeric(as.character(cur_sid_orig[8]))),df=as.numeric(as.character(cur_sid_orig[5]))-1) 
-        pval_zscore=round(pnorm(abs(as.numeric(as.character(cur_sid_orig[8]))),lower.tail = FALSE),3)
-        #pval_zscore<-length(which(as.numeric(as.character(cur_sid_rand[,9]))>as.numeric(as.character(cur_sid_orig[8]))))/itrs
+        z.score=as.numeric(as.character(cur_sid_orig[3]))
         
+        pval_zscore=round(pnorm(abs(z.score),lower.tail = FALSE),3)
         
+        #length(which(as.numeric(as.character(cur_sid_rand[,3]))>as.numeric(as.character(cur_sid_orig[3]))))/itrs
         pval_stdmaxmean=length(which(as.numeric(as.character(cur_sid_rand[,4]))>as.numeric(as.character(cur_sid_orig[4]))))/itrs
         
-        #meanp_val=mean(c(pval_agg.stat,pval_zscore,pval_stdmaxmean),na.rm=TRUE)
-        # zval=(0.5-meanp_val)*sqrt(12*3)
-        #log(pval_agg.stat),
+        #z.score=as.numeric(as.character(cur_sid_orig[7]))
+        # pval_zscore=round(pnorm(abs(z.score),lower.tail = FALSE),3)
         
-        #log(pval_agg.stat),
-        chisq_stat<-(-2)*sum(c(log(pval_zscore),log(pval_stdmaxmean)))
-        pval_meta <-pchisq(chisq_stat,df=4,lower.tail=FALSE) #df: 2 x k #round(pnorm((zval),lower.tail = FALSE),3)
+        #pval_stdmaxmean=round(pnorm(abs(z.score),lower.tail = FALSE),3)
+        
+        pval_meta=meanp.agg(c(pval_agg.stat,pval_zscore,pval_stdmaxmean))$p #,na.rm=TRUE)$p
+        #zval=(0.5-meanp_val)*sqrt(12*3)
+        #pval_meta <- round(pnorm((zval),lower.tail = FALSE),3)
         
         pval_mat<-c(as.character(sid_list[c]),round(pval_agg.stat,3),round(pval_zscore,3),round(pval_stdmaxmean,3),round(pval_meta,3))
         #   return(pval_mat)
@@ -239,38 +224,10 @@ function(metab_data,reference_sets,itrs=1000,fcs.min.hits=2,numnodes=2){
     res<-merge(set_statistic1,metabset_res_pvalmat,by="SetID")
     
     res<-merge(res,set_size,by="SetID")
-    #  #save(res,file="reschild.Rda")
     
+    #res$Z.score<-res$MaxMean.Std
     
-    
-    
-    
-    if(FALSE)
-    {
-      pdf("QQplot.FCS.pdf")
-      par(mfrow=c(2,2))
-      my.pvalues=as.numeric(as.character(res$pval.Agg.Statistic))
-      exp.pvalues<-(rank(my.pvalues, ties.method="first")+.5)/(length(my.pvalues)+1)
-      plot(-log10(exp.pvalues), -log10(my.pvalues), asp=1,main="QQplot-meanStatistic")
-      abline(0,1)
-      
-      my.pvalues=as.numeric(as.character(res$pval.Z.score))
-      exp.pvalues<-(rank(my.pvalues, ties.method="first")+.5)/(length(my.pvalues)+1)
-      plot(-log10(exp.pvalues), -log10(my.pvalues), asp=1,main="QQplot-Zscore")
-      abline(0,1)
-      
-      my.pvalues=as.numeric(as.character(res$pval.MaxMean))
-      exp.pvalues<-(rank(my.pvalues, ties.method="first")+.5)/(length(my.pvalues)+1)
-      plot(-log10(exp.pvalues), -log10(my.pvalues), asp=1,main="QQplot-maxmean")
-      abline(0,1)
-      
-      my.pvalues=as.numeric(as.character(res$pval.meta))
-      exp.pvalues<-(rank(my.pvalues, ties.method="first")+.5)/(length(my.pvalues)+1)
-      plot(-log10(exp.pvalues), -log10(my.pvalues), asp=1,main="QQplot-meta")
-      abline(0,1)
-      
-      dev.off()
-    }
+    #save(res,file="reschild.Rda")
     
     return(res)
     

@@ -1,4 +1,3 @@
-#
 get_hca <-
 function(feature_table_file=NA,parentoutput_dir,class_labels_file=NA,X=NA,Y=NA,heatmap.col.opt="RdBu",cor.method="spearman",
                   is.data.znorm=FALSE,analysismode="classification",

@@ -3,10 +3,8 @@
 suppressPackageStartupMessages(library(xmsPANDA))
 
 #change the input and output locations
-
-#change the input and output locations
-feature_table_file<-"https://raw.githubusercontent.com/kuppal3gt/xmsPANDA-R4.0/main/inst/shinyapp/example_data/exh1n1_metabolome.txt"
-class_labels_file<-"https://raw.githubusercontent.com/kuppal3gt/xmsPANDA-R4.0/main/inst/shinyapp/example_data/exh1n1_regression.txt"
+feature_table_file<-"~/exh1n1_metabolome.txt"
+class_labels_file<-"~/exh1n1_regression.txt"
 outloc<-"~/xmsPANDAliteoutreg/"
 
 Xmat<-read.table(feature_table_file,sep="\t",header=TRUE,stringsAsFactors = FALSE,check.names = FALSE)

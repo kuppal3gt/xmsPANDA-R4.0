@@ -1,4 +1,3 @@
-#
 get_pcascoredistplots <-
 function(X=NA,Y=NA,feature_table_file,parentoutput_dir,class_labels_file,
                                 sample.col.opt=c("journal", "npg", "nejm", "jco", "lancet", "custom1", "brewer.RdYlBu", "brewer.RdBu", "brewer.PuOr", 

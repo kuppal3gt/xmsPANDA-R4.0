@@ -18,7 +18,7 @@ function(kfold,featuretable,classlabels,kernelname="radial",errortype="AUC",conf
     mz_time<-paste(round(featuretable[,1],5),"_",round(featuretable[,2],2),sep="")
   }
   
-  if(is.na(column.rm.index)==FALSE){
+  if(is.na(column.rm.index)[1]==FALSE){
     x=t(featuretable[,-c(column.rm.index)])
   }else{
     
@@ -33,7 +33,7 @@ function(kfold,featuretable,classlabels,kernelname="radial",errortype="AUC",conf
     
     print("Note: the order of features/variables should be same in the train and test sets.")
     
-    if(is.na(column.rm.index)==FALSE){
+    if(is.na(column.rm.index)[1]==FALSE){
       testfeaturetable<-t(testfeaturetable[,-c(column.rm.index)])
     }else{
       

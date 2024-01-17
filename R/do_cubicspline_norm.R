@@ -1,4 +1,3 @@
-#
 do_cubicspline_norm <-
 function(data_m){
   
