@@ -24,7 +24,7 @@ function(libname, pkgname) {
 .onLoad <-
 function(libname, pkgname) {
   # something to run
-  packageStartupMessage("xmsPANDA v1.4.1 (12/09/2023) successfully loaded.")
+  packageStartupMessage("xmsPANDA v1.4.2 (01/17/2024) successfully loaded.")
   suppressMessages(library(RColorBrewer))
   #suppressMessages(library(data.table))
   suppressMessages(library(plyr))
